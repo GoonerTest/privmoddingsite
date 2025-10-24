@@ -13,7 +13,7 @@ def check_title(title_id):
     url = f"https://{title_id}.playfabapi.com/Admin/GetTitleData"
     headers = {
         "Content-Type": "application/json",
-        "X-SecretKey": "dummy"  # Dummy key; server responds even if invalid
+        "X-SecretKey": "UCP9IQYGGPPIG3Y5HX8JZQYCMKZDTWWADE48PHT1PGNQADW5H6"  # Dummy key; server responds even if invalid
     }
     try:
         resp = requests.post(url, json={}, headers=headers, timeout=5)
