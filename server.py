@@ -7,20 +7,10 @@ CORS(app)
 
 @app.route("/check_title/<title_id>", methods=["GET"])
 def check_title(title_id):
-    """
-    Check if a PlayFab Title ID exists by hitting the Admin/GetTitleData endpoint.
-    """
-    url = f"https://{title_id}.playfabapi.com/Admin/GetTitleData"
-    headers = {
-        "Content-Type": "application/json",
-        "X-SecretKey": "UCP9IQYGGPPIG3Y5HX8JZQYCMKZDTWWADE48PHT1PGNQADW5H6"  # Dummy key; server responds even if invalid
-    }
+    url = f"https://{title_id}.playfabapi.com"
     try:
-        resp = requests.post(url, json={}, headers=headers, timeout=5)
-        # 200, 400, or 403 means Title exists
-        if resp.status_code in [200, 400, 403]:
-            return jsonify(valid=True)
-        return jsonify(valid=False)
+        resp = requests.head(url, timeout=5)  # simple HEAD request
+        return jsonify(valid=True)
     except requests.RequestException:
         return jsonify(valid=False)
 
